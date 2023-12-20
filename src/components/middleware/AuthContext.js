@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
       // Attempt to parse the JSON string
-      return storedUser ? JSON.parse(storedUser) : {};
+      return storedUser ? JSON.parse(storedUser) : null;
     } catch (error) {
       console.error('Error parsing user data:', error);
       return {};

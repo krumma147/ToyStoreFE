@@ -27,7 +27,7 @@ const Login = () => {
     <div class="container">
         <div class="row m-5 no-gutters shadow-lg">
             <div class="col-md-6 d-none d-md-block">
-                <img src="https://images.unsplash.com/photo-1566888596782-c7f41cc184c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" 
+                <img src="images/register.png" 
                 class="img-fluid" style={{minHeight:"100%"}} alt="" />
             </div>
 
@@ -78,7 +78,7 @@ const Login = () => {
                         </button>
                     </div>
                 <div class="pt-4 text-center">
-                    Get Members Benefit. <a href="*">Sign Up</a>
+                    Get Members Benefit. <a href="/register">Sign Up</a>
                 </div>
             </div>
 

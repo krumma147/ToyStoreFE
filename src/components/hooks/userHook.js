@@ -22,4 +22,15 @@ const userLogin = async (email, password) => {
     }
   };
 
-export { getUserById, userLogin };
+  const CreateUser = async (user) => {
+    try {
+      // Make a POST request to create a new user
+      await axios.post('http://localhost:3100/users/add', user);
+      // Optionally, you can redirect the user or perform any other action upon successful user creation
+      } catch (error) {
+      console.error('Error creating user:', error);
+      }
+
+  }
+
+export { getUserById, userLogin, CreateUser};

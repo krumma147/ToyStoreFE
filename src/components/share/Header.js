@@ -1,9 +1,17 @@
 import React from 'react';
 import { useAuth } from '../middleware/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    const { user } = useAuth();
-    console.log(user);
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
+
+    const handleLogout = () => {
+        logout();
+        window.location.reload();
+        navigate('/');
+    }
+    
     return(
         <>
             <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
@@ -22,9 +30,6 @@ const Header = () => {
                             </li>
                             <li><a class="nav-link" href="/toys">Shop</a></li>
                             <li><a class="nav-link" href="/about">About us</a></li>
-                            <li><a class="nav-link" href="*">Services</a></li>
-                            <li><a class="nav-link" href="*">Blog</a></li>
-                            <li><a class="nav-link" href="*">Contact us</a></li>
                         </ul>
 
                         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -37,28 +42,32 @@ const Header = () => {
                                         
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li><a class="dropdown-item" href="#">User Detail</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="/toys/list">Toy List</a></li>
+                                            <li><a class="dropdown-item" href="/branches">Branches</a></li>
+                                            <li><a class="dropdown-item" href="/categories">Categories</a></li>
                                             <li><hr class="dropdown-divider"/></li>
-                                            <li><a class="dropdown-item" href="#">Log out</a></li>
+                                            <li><button class="dropdown-item" onClick={handleLogout}>Log out</button></li>
                                         </ul>
                                     </li>
 
                                     <li>
-                                        <a className="nav-link" href="cart.html">
-                                        <img src="/images/cart.svg" alt="" />
-                                    </a>
-                                </li>
+                                        <a className="nav-link" href="/cart">
+                                            <img src="/images/cart.svg" alt="" />
+                                        </a>
+                                    </li>
+
+                                    
                                 </>
                             ) : (
                                 <>
                                 <li>
                                     <a className="nav-link" href="/login">
-                                    <img src="/images/user.svg" alt="" />
+                                        <img src="/images/user.svg" alt="" />
                                     </a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="cart.html">
-                                    <img src="/images/cart.svg" alt="" />
+                                    <a className="nav-link" href="/cart">
+                                        <img src="/images/cart.svg" alt="" />
                                     </a>
                                 </li>
                                 </>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { getUserById } from '../hooks/userHook';
+import { getUserById, CreateUser } from '../hooks/userHook';
 //NOTE: Add validatation
 
 const AddUser = () => {
@@ -40,14 +40,7 @@ const AddUser = () => {
             }
             if(password !== repassword)
                 console.warn("Password and Re-password do not match");
-            try {
-            // Make a POST request to create a new user
-            await axios.post('http://localhost:3100/users/add', user);
-            // Optionally, you can redirect the user or perform any other action upon successful user creation
-            } catch (error) {
-            console.error('Error creating user:', error);
-            }
-
+            await CreateUser(user);
             navigate('/users');
         };
 

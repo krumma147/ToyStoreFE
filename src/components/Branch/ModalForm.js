@@ -25,9 +25,9 @@ const ModalForm = ({ branches, id, action, index }) => {
   // /Active modal button
   const toggleModel = () => {
     setModal(!modal);
-    if(id){
-      console.log(id);
-    }
+    // if(id){
+    //   console.log(id);
+    // }
   };
   
   // Btn handler
@@ -44,6 +44,7 @@ const ModalForm = ({ branches, id, action, index }) => {
             location: location,
             city: city
         };
+        console.log(branch);
         if (action === "add") {
             AddNewBranch(branch);
         } else if (action === "edit") {
@@ -54,6 +55,15 @@ const ModalForm = ({ branches, id, action, index }) => {
         alert("Branch already exists!");
         setLocation("");
         setCity("");
+      }
+    }else{
+      const branch = {
+        location: location,
+        city: city
+      };
+      if (action === "add") {
+          AddNewBranch(branch);
+          window.location.reload();
       }
     }
   };

@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import NotFound from './components/NotFound';
 import Toy from "./components/Toy/Toy";
+import Cart from "./components/Cart";
 //Style 
 import { GlobalStyle } from './GlobalStyles';
 //Auth
@@ -51,6 +52,7 @@ const App = () => (
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route path="/toys/*" element={<Toy />} />
+            <Route path="/cart" element={<Cart />} />
             {/* <Route exact path="/toys" element={<ToyList />} />
             <Route path="/toys/:id" element={<ToyDetail />} />
             <Route exact path="/shop" element={<Shop />} /> */}
