@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const GetAllBranch = async () =>{
     try {
-        const response = await axios.get(`http://localhost:3100/branches`);
+        const response = await axios.get(`http://toystore-api.onrender.com/branches`);
         return response.data;
     } catch (error) {
         console.error('Error fetching user by ID:', error);
@@ -11,7 +11,7 @@ const GetAllBranch = async () =>{
 
 const AddNewBranch = async (branch) => {
     try {
-        await axios.post(`http://localhost:3100/branches/add/`, branch);
+        await axios.post(`http://toystore-api.onrender.com/branches/add/`, branch);
     } catch (error) {
         console.error('Error fetching user by ID:', error);
     }
@@ -19,7 +19,7 @@ const AddNewBranch = async (branch) => {
 
   const UpdateBranch = async (id, branch) => {
     try {
-      await axios.post(`http://localhost:3100/branches/edit/${id}`, branch);
+      await axios.post(`http://toystore-api.onrender.com/branches/edit/${id}`, branch);
     } catch (error) {
       console.error('Error updating category:', error);
     }
@@ -27,7 +27,7 @@ const AddNewBranch = async (branch) => {
 
 const GetBranchById = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:3100/branches/get/${id}`);
+        const response = await axios.get(`http://toystore-api.onrender.com/branches/get/${id}`);
         return response.data; // Return the data received from the API
     } catch (error) {
         console.error('Error updating category:', error);
@@ -37,7 +37,7 @@ const GetBranchById = async (id) => {
 
 const DeleteBranch = async (id) => {
     try {
-        await axios.delete(`http://localhost:3100/branches/delete/${id}`);
+        await axios.delete(`http://toystore-api.onrender.com/branches/delete/${id}`);
     } catch (error) {
         console.error('Error deleting category:', error);
     }
