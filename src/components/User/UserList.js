@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {GetAllUser} from '../hooks/userHook';
 import axios from 'axios';
 
 const UserList = () => {
@@ -9,9 +10,9 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         // Make a GET request to the API endpoint
-        const response = await axios.get('http://localhost:3100/users');
+        const response = await GetAllUser();
         // Update the state with the fetched data
-        setUsers(response.data);
+        setUsers(response);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

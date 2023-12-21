@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const GetAllCategory = async () =>{
     try {
-        const response = await axios.get(`http://toystore-api.onrender.com/categories`);
+        const response = await axios.get(`http://localhost:3100/categories`);
         return response.data;
     } catch (error) {
         console.error('Error fetching user by ID:', error);
@@ -11,7 +11,7 @@ const GetAllCategory = async () =>{
 
 const AddNew = async (category) => {
     try {
-        await axios.post(`http://toystore-api.onrender.com/categories/add/`, category);
+        await axios.post(`http://localhost:3100/categories/add/`, category);
     } catch (error) {
         console.error('Error fetching user by ID:', error);
     }
@@ -19,7 +19,7 @@ const AddNew = async (category) => {
 
   const UpdateCategory = async (id, category) => {
     try {
-      await axios.post(`http://toystore-api.onrender.com/categories/edit/${id}`, category);
+      await axios.post(`http://localhost:3100/categories/edit/${id}`, category);
     } catch (error) {
       console.error('Error updating category:', error);
     }
@@ -27,7 +27,7 @@ const AddNew = async (category) => {
 
 const GetCategoryById = async (id) => {
     try {
-        const res = await axios.get(`http://toystore-api.onrender.com/categories/get/${id}`);
+        const res = await axios.get(`http://localhost:3100/categories/get/${id}`);
         return res.data;
     } catch (error) {
         console.error('Error updating category:', error);
@@ -36,7 +36,7 @@ const GetCategoryById = async (id) => {
 
 const DeleteCategory = async (id) => {
     try {
-        await axios.delete(`http://toystore-api.onrender.com/categories/delete/${id}`);
+        await axios.delete(`http://localhost:3100/categories/delete/${id}`);
     } catch (error) {
         console.error('Error deleting category:', error);
     }
