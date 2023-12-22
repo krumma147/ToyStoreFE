@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {GetAllUser} from '../hooks/userHook';
-import axios from 'axios';
+import {GetAllUser, DeleteUser} from '../hooks/userHook';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -27,7 +26,7 @@ const UserList = () => {
 
   const handleDelete = async (id) => {
     //UNDONE: Confirmation & FIX 404 ERROR
-    await axios.delete(`http://localhost:3100/users/delete/${id}`);
+    DeleteUser(id);
   };
 
   return (
@@ -47,7 +46,7 @@ const UserList = () => {
                 <th scope="col">No.</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
+                <th scope="col">Role</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -57,7 +56,7 @@ const UserList = () => {
                   <td>{index+1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.password}</td>
+                  <td>{user.role}</td>
                   <td>
                     <div class="d-flex gap-2">
                       <button

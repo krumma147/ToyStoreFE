@@ -2,12 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../share/Header';
 import Footer from '../share/Footer';
-
+import { useAuth } from '../middleware/AuthContext';
+import { AddOrder } from '../hooks/orderHook';
 
 const ToyDetail = ({ toys }) => {
   const { id } = useParams();
   const [selectedToy, setSelectedToy] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+
+  const handlePurchase = (e) => {
+    if(!user){
+      alert("You need to login to purchase this product!");
+    }else{
+      const req = AddOrder(
+        {
+          user: user.id,
+          toy: id
+        }
+      )
+        if(req){
+          alert("Purchase Complete!");
+        }
+    }
+  }
 
   useEffect(() => {
     const fetchToy = async () => {
@@ -41,26 +59,6 @@ const ToyDetail = ({ toys }) => {
   return (
     <>
       <Header />
-      {/* <div className="container mt-5">
-        <div className="row">
-          <div className="col-md-6">
-            <img
-              src={selectedToy.image === '' ? '/images/products/uhoh.png' : `/images/products/${selectedToy.image}`}
-              className="img-fluid rounded"
-              alt=""
-            />
-          </div>
-          <div className="col-md-6">
-            <h2>{selectedToy.name}</h2>
-            <h3>Category: {selectedToy.category.name}</h3>
-            <p>Price: {selectedToy.price} VND</p>
-            <p>Avaiable at:</p>
-            <p>
-              {selectedToy.branch.location}, {selectedToy.branch.city}
-            </p>
-          </div>
-        </div>
-      </div> */}
       <section class="py-5">
         <div class="container">
           <div class="row gx-5">
@@ -154,7 +152,7 @@ const ToyDetail = ({ toys }) => {
                     </div>
                   </div>
                 </div>
-                <a href="*" class="btn btn-warning shadow-0"> Buy now </a>
+                <button onClick={handlePurchase} class="btn btn-warning shadow-0"> Buy now </button>
                 <a href="*" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
                 <a href="*" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
               </div>

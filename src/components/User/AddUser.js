@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { getUserById, CreateUser } from '../hooks/userHook';
+import { getUserById, CreateUser, EditUser } from '../hooks/userHook';
 //NOTE: Add validatation
 
 const AddUser = () => {
@@ -11,6 +10,7 @@ const AddUser = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repassword, setRePassword] = useState('');
+    const [role, setRole] = useState('');
     if (id) {
         
 
@@ -48,7 +48,8 @@ const AddUser = () => {
             let user = {
                 name : name,
                 email:  email,
-                password: password
+                password: password,
+                role: role
             }
             if(password === '') {
                 console.warn("Invalid password");
@@ -57,7 +58,7 @@ const AddUser = () => {
                 console.warn("Password and Re-password do not match");
             try {
                 // Make a POST request to create a new user
-                await axios.post(`http://localhost:3100/users/edit/${id}`, user);
+                await EditUser(id, user);
                 // Optionally, you can redirect the user or perform any other action upon successful user creation
             } catch (error) {
             console.error('Error creating user:', error);
@@ -100,6 +101,16 @@ const AddUser = () => {
                     class="form-control"
                     placeholder="Email Address"
                 />
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Role</label>
+                <select class="form-select" aria-label="select"
+                    onChange={(e)=>setRole(e.target.value)}
+                >
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
 
             <button className="btn btn-primary" type="submit">Edit</button>

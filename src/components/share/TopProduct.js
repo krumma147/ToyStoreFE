@@ -13,7 +13,7 @@ const TopProduct = () => {
 					</div> 
 
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="cart.html">
+						<a class="product-item" href="/toys">
 							<img src="images/products/lego3.png" class="img-fluid product-thumbnail" alt="" />
 							<h3 class="product-title">Yoda's Jedi Starfighter</h3>
 							<strong class="product-price">$50.00</strong>
@@ -25,7 +25,7 @@ const TopProduct = () => {
 					</div> 
 
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="cart.html">
+						<a class="product-item" href="/toys">
 							<img src="images/products/lego4.png" class="img-fluid product-thumbnail" alt="" />
 							<h3 class="product-title">Expecto Patronum</h3>
 							<strong class="product-price">$78.00</strong>
@@ -37,7 +37,7 @@ const TopProduct = () => {
 					</div>
 
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="cart.html" >
+						<a class="product-item" href="/toys" >
 							<img src="images/products/lego5.png" class="img-fluid product-thumbnail" alt="" />
 							<h3 class="product-title">Explorer Diving Boat</h3>
 							<strong class="product-price">$43.00</strong>

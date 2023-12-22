@@ -36,15 +36,21 @@ const Header = () => {
                             {user ? (
                                 <>
                                     <li class="nav-item dropdown">
-                                        <a className="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {user.name}
-                                        </a>
+                                        <button className="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {user.username}
+                                        </button>
                                         
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="#">User Detail</a></li>
-                                            <li><a class="dropdown-item" href="/toys/list">Toy List</a></li>
-                                            <li><a class="dropdown-item" href="/branches">Branches</a></li>
-                                            <li><a class="dropdown-item" href="/categories">Categories</a></li>
+                                            <li><p class="dropdown-item" href="*">User Detail</p></li>
+                                            {user.role === 'admin' ? (
+                                                <>
+                                                    <li><a class="dropdown-item" href="/admin">Admin Page</a></li>
+                                                    <li><a class="dropdown-item" href="/users">UserList</a></li>
+                                                    <li><a class="dropdown-item" href="/toys/list">Toy List</a></li>
+                                                    <li><a class="dropdown-item" href="/branches">Branches</a></li>
+                                                    <li><a class="dropdown-item" href="/categories">Categories</a></li>
+                                                </>
+                                            ): null}
                                             <li><hr class="dropdown-divider"/></li>
                                             <li><button class="dropdown-item" onClick={handleLogout}>Log out</button></li>
                                         </ul>

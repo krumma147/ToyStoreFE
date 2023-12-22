@@ -4,6 +4,7 @@ import { useAuth } from './middleware/AuthContext';
 import { userLogin } from './hooks/userHook';
 
 const Login = () => {
+    sessionStorage.clear();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
@@ -13,9 +14,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
+        
         const res = await userLogin(email, password);
-        if (res._id) {
-            login(res);
+        console.log(`Data from APi: ${res}`);
+        if (res.token) {
+            const { token, id, username, role } = res;
+            login(token, id, username, role);
             navigate('/toys');
         }
       } catch (error) {

@@ -1,6 +1,6 @@
 import React from 'react';
 //Router
-import { BrowserRouter, Routes, Route, useNavigate, Navigate   } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, HashRouter   } from 'react-router-dom';
 import About from './components/About';
 import Home from './components/Home';
 import UserList from './components/User/UserList';
@@ -13,30 +13,15 @@ import Register from './components/Register';
 import NotFound from './components/NotFound';
 import Toy from "./components/Toy/Toy";
 import Cart from "./components/Cart";
+import Order from './components/Shop/Order';
+import User from "./components/User/UserRoute";
+import AdminRoute from './components/Admin/AdminRoute'
 //Style 
 import { GlobalStyle } from './GlobalStyles';
 //Auth
 
 import { AuthProvider, useAuth } from './components/middleware/AuthContext';
-
-const PrivateRoute = ({ element, roles }) => {
-    const { user } = useAuth();
-  
-    if (!user) {
-      // Redirect to the login page if the user is not authenticated
-      return <Navigate to="/login" />;
-    }
-  
-    // Check if the user has the required role
-    if (roles && !roles.includes(user.role)) {
-      // Redirect to a forbidden page or handle unauthorized access
-      return <Navigate to="/forbidden" />;
-    }
-  
-    // Render the provided element if the user is authenticated and has the required role
-    return React.cloneElement(element, {});
-  };
-
+import { PrivateRoute } from './components/middleware/PrivateAuth';
 const App = () => (
     <BrowserRouter>
         <AuthProvider>
@@ -44,29 +29,20 @@ const App = () => (
             <Route exact path="/" element={<Home /> } />
             <Route path="/about" element={<About /> } />
             <Route exact path="/users/:userId" element={<UserProfile />} />
-            <Route exact path="/users/edit/:id" element={<AddUser />} />
-            <Route exact path="/users/add" element={<AddUser />} />
-            <Route exact path="/users" element={<UserList />} />
-            <Route exact path="/categories" element={<CategoriesList />} />
-            <Route exact path="/branches" element={<BranchList />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route path="/toys/*" element={<Toy />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Order />} />
             {/* <Route exact path="/toys" element={<ToyList />} />
             <Route path="/toys/:id" element={<ToyDetail />} />
             <Route exact path="/shop" element={<Shop />} /> */}
+            <Route path="/users/*" element={<PrivateRoute element={<User />} roles={['admin']} />} />
+            <Route path="/admin/*" element={<PrivateRoute element={<AdminRoute />} roles={['admin']} />} />
             <Route path="*" element={<NotFound />} />
-
-            <Route
-                path="/users/add"
-                element={<PrivateRoute element={<AddUser />} roles={['admin']} />}
-            />
-
-            <Route
-            path="/users"
-            element={<PrivateRoute element={<UserList />} roles={['admin']} />}
-            />
+            
+            <Route exact path="/categories" element={<PrivateRoute element={<CategoriesList />} roles={['admin']} />} />
+            <Route exact path="/branches" element={<PrivateRoute element={<BranchList />} roles={['admin']} />} />
         </Routes>
         <GlobalStyle />
         
@@ -74,3 +50,4 @@ const App = () => (
   </BrowserRouter>
 )
 
+export default App;
