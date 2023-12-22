@@ -89,7 +89,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
   
   const modalBody = (
     <div class="input-group mb-3">
-      <span class="input-group " id="inputGroup-sizing-default">
+      <span class="input-group " id="ToyModalLabel">
         Toy Name
       </span>
       <input
@@ -98,10 +98,10 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
         type="text"
         class="form-control"
         aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-default"
+        aria-describedby="ToyModalLabel"
       />
 
-        <span className="input-group" id="inputGroup-sizing-default">
+        <span className="input-group" id="ToyModalLabel">
             Toy Price
         </span>
         <input
@@ -110,10 +110,10 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
             type="number"
             className="form-control"
             aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default"
+            aria-describedby="ToyModalLabel"
         />
 
-        <span className="input-group" id="inputGroup-sizing-default">
+        <span className="input-group" id="ToyModalLabel">
             Toy Category
         </span>
         <select
@@ -132,7 +132,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
         ))}
         </select>
 
-        <span className="input-group" id="inputGroup-sizing-default">
+        <span className="input-group" id="ToyModalLabel">
             Toy Branch
         </span>
         <select
@@ -151,7 +151,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
             ))}
         </select>
 
-        <span className="input-group" id="inputGroup-sizing-default">
+        <span className="input-group" id="ToyModalLabel">
             Toy Image
         </span>
         <input
@@ -159,7 +159,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
             type="file"
             className="form-control"
             aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default"
+            aria-describedby="ToyModalLabel"
         />
     </div>
   );
@@ -170,23 +170,23 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
         type="button"
         className={`btn ${id ? "btn-warning" : "btn-primary"} `}
         data-bs-toggle="modal"
-        data-bs-target={`#${action}CategoryModal-${id || "add"}`}
+        data-bs-target={`#${action}ToyModal-${id || "add"}`}
         onClick={toggleModel}
       >
-        {id ? "Update" : "Add New"}
+        {id ? "Update" : "Add Toy"}
       </button>
       
       <div
         className={`modal fade ${modal ? "show" : ""}`}
-        id={`${action}CategoryModal-${id || "add"}`}
+        id={`${action}ToyModal-${id || "add"}`}
         tabIndex="-1"
-        aria-labelledby={`${action}CategoryModalLabel`}
+        aria-labelledby={`${action}ToyModalLabel`}
         aria-hidden={!modal}
       >
         <div className={`modal-dialog ${modal ? "" : "display-none"}`}>
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id={`${action}CategoryModalLabel`}>
+              <h5 className="modal-title" id={`${action}ToyModalLabel`}>
                 {action === "add" ? "Add New" : "Edit"} Category
               </h5>
               <button

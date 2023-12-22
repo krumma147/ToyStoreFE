@@ -26,54 +26,52 @@ const CategoriesList = () => {
   };
 
   return (
-    <div>
-      <div
-        class="container"
-      >
-        <h2>Category List</h2>
-        <div
-          class="table-responsive"
-        >
-            <ModalForm categories={categories} action="add" />
-          <table
-            class="table table-primary"
-          >
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categories.map((category, index) => (
-                <tr key={category._id} class="">
-                  <td>{index+1}</td>
-                  <td>{category.name}</td>
-
-                  <td>
-                    <div class="d-flex gap-2">
-                    <ModalForm categories={categories} id={category._id} index={index} action="edit" />
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        onClick={()=>handleDelete(category._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                    
-                    
-                  </td>
-                </tr>
-              ))}
-              
-            </tbody>
-          </table>
-        </div>
+    <>
+      <div className=''>
+        <ModalForm categories={categories} action="add" />
       </div>
-      
-    </div>
+      <div class="card border-0">
+          <div class="card-header">
+              <h3 class="card-title text-center">
+                Category List
+              </h3>
+          </div>
+          <div class="card-body">
+              <table class="table">
+                  <thead>
+                    <tr className='row'>
+                      <th className='col-md-1'>No.</th>
+                      <th className='col'>Name</th>
+                      <th className='col-md-2'>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {categories.map((category, index) => (
+                    <tr key={category._id} className='row'>
+                      <td className='col-md-1'>{index+1}</td>
+                      <td className='col'>{category.name}</td>
+
+                      <td className='col-md-2'>
+                        <div class="d-flex gap-2">
+                        <ModalForm categories={categories} id={category._id} index={index} action="edit" />
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            onClick={()=>handleDelete(category._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                        
+                        
+                      </td>
+                    </tr>
+                    ))}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </>
   );
 };
 

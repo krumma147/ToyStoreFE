@@ -1,9 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import { useAuth } from '../middleware/auth';
 import { PrivateRoute } from '../middleware/PrivateAuth';
-import AddUser from '../User/AddUser';
-import UserList from '../User/UserList';
 import Index from './index';
 
 const AdminRoute = () => {

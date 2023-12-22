@@ -4,10 +4,11 @@ import Navbar from "./Navbar";
 import Dashboard from "./Dashboard";
 import BranchList from "../Branch/BranchList";
 import CategoriesList from "../Category/CategoryList";
-import Order from "../Shop/Order";
+import Order from "../Order/Order";
 import ToyList from "../Toy/ToyList";
-
+import UserList from "../User/UserList";
 const Content = () => {
+    // In this area could get all data from API then send to other routes
     return (
         <>    
         <div class="main">
@@ -48,6 +49,14 @@ const Content = () => {
                                     aria-labelledby="toy-tab"
                                 >
                                     <ToyList />
+                                </div>
+                                <div
+                                    class="tab-pane"
+                                    id="user"
+                                    role="tabpanel"
+                                    aria-labelledby="user-tab"
+                                >
+                                    <UserList />
                                 </div>
                             </div>
                         </div>

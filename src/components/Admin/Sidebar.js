@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
     return(
-        <aside id="sidebar" class="js-sidebar">
+        <aside id="sidebar">
                     <div class="h-100">
                         <div class="sidebar-logo">
                             <a href="/">Lego</a>
@@ -18,9 +18,9 @@ const Sidebar = () => {
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+                                <a class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
                                     aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
-                                    Pages
+                                    Management
                                 </a>
                                 <ul class="sidebar-dropdown list-unstyled collapse" id="pages" role="tablist" data-bs-parent="#sidebar">
                                     <li class="sidebar-item" role="presentation">
@@ -29,7 +29,6 @@ const Sidebar = () => {
                                             id="order-tab"
                                             data-bs-toggle="tab"
                                             data-bs-target="#order"
-                                            
                                             role="tab"
                                             aria-controls="home"
                                             aria-selected="true"
@@ -74,26 +73,22 @@ const Sidebar = () => {
                                             Toys
                                         </a>
                                     </li>
+                                    <li class="sidebar-item" role="presentation">
+                                        <a
+                                            class="sidebar-link"
+                                            id="user-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#user"
+                                            role="tab"
+                                            aria-controls="user"
+                                            aria-selected="false"
+                                        >
+                                            Users
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             {/* <li class="sidebar-item">
-                                <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
-                                    aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
-                                    Posts
-                                </a>
-                                <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Post 1</a>
-                                    </li>
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Post 2</a>
-                                    </li>
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Post 3</a>
-                                    </li>
-                                </ul>
-                            </li> */}
-                            <li class="sidebar-item">
                                 <a href="#" class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
                                     aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
                                     Auth
@@ -105,20 +100,17 @@ const Sidebar = () => {
                                     <li class="sidebar-item">
                                         <a href="#" class="sidebar-link">Register</a>
                                     </li>
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Forgot Password</a>
-                                    </li>
                                 </ul>
-                            </li>
-                            <li class="sidebar-header">
+                            </li> */}
+                            {/* <li class="sidebar-header">
                                 Multi Level Menu
-                            </li>
-                            <li class="sidebar-item">
-                                {/* <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
+                            </li> */}
+                            {/* <li class="sidebar-item">
+                                <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
                                     aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
                                     Multi Dropdown
-                                </a> */}
-                                {/* <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                </a>
+                                <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                                     <li class="sidebar-item">
                                         <a href="#" class="sidebar-link collapsed" data-bs-target="#level-1"
                                             data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
@@ -131,9 +123,9 @@ const Sidebar = () => {
                                             </li>
                                         </ul>
                                     </li>
-                                </ul> */}
+                                </ul>
                                 
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </aside>

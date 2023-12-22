@@ -42,6 +42,7 @@ const Header = () => {
                                         
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li><p class="dropdown-item" href="*">User Detail</p></li>
+                                            <li><a class="dropdown-item" href="/orders">Order</a></li>
                                             {user.role === 'admin' ? (
                                                 <>
                                                     <li><a class="dropdown-item" href="/admin">Admin Page</a></li>

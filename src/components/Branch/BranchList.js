@@ -24,93 +24,57 @@ const BranchList = () => {
   };
 
   return (
-    <div>
-      <div className="container">
-        <h2>Branch List</h2>
-        <div className="table-responsive">
-          <ModalForm branches={branches} action="add" />
-          <table className="table table-primary">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Location</th>
-                <th scope="col">City</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {branches.map((branch, index) => (
-                <tr key={branch._id} className="">
-                  <td>{index + 1}</td>
-                  <td>{branch.location}</td>
-                  <td>{branch.city}</td>
-                  <td>
-                    <div className="d-flex gap-2">
-                      <ModalForm
-                        branches={branches}
-                        id={branch._id}
-                        index={index}
-                        action="edit"
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={() => handleDelete(branch._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <>
+      <div className=''>
+        <ModalForm branches={branches} action="add" />
       </div>
-    </div>
-
-// <div class="card border-0">
-// <div class="card-header">
-//     <h5 class="card-title">
-//         Basic Table
-//     </h5>
-//     <h6 class="card-subtitle text-muted">
-//         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-//         necessitatibus reprehenderit itaque!
-//     </h6>
-// </div>
-// <div class="card-body">
-//     <table class="table">
-//         <thead>
-//             <tr>
-//                 <th scope="col">#</th>
-//                 <th scope="col">First</th>
-//                 <th scope="col">Last</th>
-//                 <th scope="col">Handle</th>
-//             </tr>
-//         </thead>
-//         <tbody>
-//             <tr>
-//                 <th scope="row">1</th>
-//                 <td>Mark</td>
-//                 <td>Otto</td>
-//                 <td>@mdo</td>
-//             </tr>
-//             <tr>
-//                 <th scope="row">2</th>
-//                 <td>Jacob</td>
-//                 <td>Thornton</td>
-//                 <td>@fat</td>
-//             </tr>
-//             <tr>
-//                 <th scope="row">3</th>
-//                 <td colspan="2">Larry the Bird</td>
-//                 <td>@twitter</td>
-//             </tr>
-//         </tbody>
-//     </table>
-// </div>
-// </div>
+      <div class="card border-0">
+          <div class="card-header">
+              <h3 class="card-title text-center">
+                Branch List
+              </h3>
+          </div>
+          <div class="card-body">
+              <table class="table">
+                  <thead>
+                    <tr className='row'>
+                    <th className='col-md-1'>No.</th>
+                    <th className='col'>Location</th>
+                    <th className='col'>City</th>
+                    <th className='col-md-2'>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {branches.map((branch, index) => (
+                    <tr key={branch._id} className="row">
+                      <td className='col-md-1'>{index + 1}</td>
+                      <td className='col'>{branch.location}</td>
+                      <td className='col'>{branch.city}</td>
+                      <td className='col-md-2'>
+                        <div className="d-flex gap-2">
+                          <ModalForm
+                            branches={branches}
+                            id={branch._id}
+                            index={index}
+                            action="edit"
+                          />
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() => handleDelete(branch._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    
+    </>
   );
 };
 

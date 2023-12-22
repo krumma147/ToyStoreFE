@@ -14,7 +14,6 @@ const GetAllToy = async () =>{
             toy.category = await GetCategoryById(toy.category);
             return toy;
         }));
-        console.log(res);
         return toys;
     } catch (error) {
         console.error('Error fetching user by ID:', error);

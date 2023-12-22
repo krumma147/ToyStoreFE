@@ -80,7 +80,7 @@ const ModalForm = ({ categories, id, action, index }) => {
         data-bs-target={`#${action}CategoryModal-${id || "add"}`}
         onClick={toggleModel}
       >
-        {id ? "Update" : "Add New"}
+        {id ? "Update" : "Add Category"}
       </button>
       
       <div

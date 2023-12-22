@@ -107,23 +107,23 @@ const ModalForm = ({ branches, id, action, index }) => {
         type="button"
         className={`btn ${id ? "btn-warning" : "btn-primary"} `}
         data-bs-toggle="modal"
-        data-bs-target={`#${action}CategoryModal-${id || "add"}`}
+        data-bs-target={`#${action}BranchModal-${id || "add"}`}
         onClick={toggleModel}
       >
-        {id ? "Update" : "Add New"}
+        {id ? "Update" : "Add Branch"}
       </button>
       
       <div
         className={`modal fade ${modal ? "show" : ""}`}
-        id={`${action}CategoryModal-${id || "add"}`}
+        id={`${action}BranchModal-${id || "add"}`}
         tabIndex="-1"
-        aria-labelledby={`${action}CategoryModalLabel`}
+        aria-labelledby={`${action}BranchModalLabel`}
         aria-hidden={!modal}
       >
         <div className={`modal-dialog ${modal ? "" : "display-none"}`}>
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id={`${action}CategoryModalLabel`}>
+              <h5 className="modal-title" id={`${action}BranchModalLabel`}>
                 {action === "add" ? "Add New" : "Edit"} Category
               </h5>
               <button
