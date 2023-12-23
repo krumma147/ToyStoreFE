@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -34,11 +35,12 @@ const login = (token, id, username, role) => {
   sessionStorage.setItem('username', username);
   sessionStorage.setItem('role', role);
 };
-
+const navigate = useNavigate();
 const logout = () => {
   // Perform logout logic and clear user data and JWT
   setUser({});
   sessionStorage.clear();
+  navigate('/login');
 };
 
   return (

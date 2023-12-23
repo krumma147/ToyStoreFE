@@ -8,8 +8,7 @@ const Header = () => {
 
     const handleLogout = () => {
         logout();
-        window.location.reload();
-        navigate('/');
+        // window.location.reload();
     }
     
     return(

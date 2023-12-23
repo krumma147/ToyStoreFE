@@ -36,10 +36,21 @@ const UserOrder = () =>{
         fetchData();
     }, [user._id]);
     
-      const getToyName = (toyId) => {
+      const getToy = (toyId) => {
         const toy = toys.find((t) => t._id === toyId);
-        return toy ? toy.name : 'Unknown Toy';
+        return toy ? toy : {
+            name: 'Unknown toy',
+            price: 0
+        };
       };
+
+      const getTotalToysPrice = () => {
+        let sum = 0;
+        orders.map((order) => {
+            sum += getToy(order.toy).price;
+        })
+        return sum;
+      }
 
     return(
         <>
@@ -49,6 +60,9 @@ const UserOrder = () =>{
                     <h3 class="card-title text-center">
                         Order List
                     </h3>
+                    <h4 className="subtitle">
+                        Amount of orders: {orders.length}
+                    </h4>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -57,6 +71,7 @@ const UserOrder = () =>{
                             <th className='col-md-1'>No.</th>
                             <th className='col'>User</th>
                             <th className='col'>Toy</th>
+                            <th className='col'>Price</th>
                             <th className='col-md-2'>Actions</th>
                             </tr>
                         </thead>
@@ -71,7 +86,8 @@ const UserOrder = () =>{
                             <tr key={order._id} className='row'>
                             <td className='col-md-1'>{index+1}</td>
                             <td className='col'>{user.username}</td>
-                            <td className='col'>{getToyName(order.toy)}</td>
+                            <td className='col'>{getToy(order.toy).name}</td>
+                            <td className='col'>{getToy(order.toy).price}</td>
                             <td className='col-md-2'>
                                 <div class="d-flex gap-2">
                                 {/* <ModalForm toys={toys} id={toy._id} index={index} action="edit" categories={categories} branches={branches} /> */}
@@ -90,6 +106,18 @@ const UserOrder = () =>{
                         ))}
                         </tbody>
                     </table>
+                    <div class="card-footer">
+                        <div className="card-footer">
+                            <tr className='row'>
+                                <td className='col-md-1'></td>
+                                <td className='col'></td>
+                                <td className='col'>Total:</td>
+                                <td className='col'><h4>{getTotalToysPrice()}   </h4></td>
+                                <td className='col-md-2'></td>
+                            </tr>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
             <Footer/>
