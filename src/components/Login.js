@@ -19,7 +19,7 @@ const Login = () => {
         console.log(`Data from APi: ${res}`);
         if (res.token) {
             const { token, id, username, role } = res;
-            login(token, id, username, role);
+            await login(token, id, username, role);
             navigate('/toys');
         }
       } catch (error) {

@@ -1,13 +1,18 @@
 import React, {useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { GetAllToy } from "../hooks/toyHook";
 import { DeleteOrder, GetOrderForUser } from '../hooks/orderHook';
 import { useAuth } from "../middleware/AuthContext";
 import Header from "../share/Header";
 import Footer from "../share/Footer";
 const UserOrder = () =>{
+    const navigate = useNavigate();
     const { user } = useAuth();
     const [orders, setOrders] = useState([]);
     const [toys, setToys] = useState([]);
+    if(!user.token){
+        navigate("/");
+    }
 
     const handleDelete = async (id) => {
         try {

@@ -104,13 +104,12 @@ const ToyDetail = ({ toys }) => {
                 </div>
 
                 <div class="mb-3">
-                  <span class="h5">$75.00</span>
+                  <span class="h5">{selectedToy.price} VND</span>
                   <span class="text-muted">/per box</span>
                 </div>
 
                 <p>
-                  Modern look and quality demo item is a streetwear-inspired collection that continues to break away from the conventions of mainstream fashion. Made in Italy, these black and brown clothing low-top shirts for
-                  men.
+                The Lego "City Space Rover" toy set is a wonderful creation for children and Lego lovers. The set includes a versatile space rover with large wheels, doors that open up and a full set of dangerous equipment. Players can assemble the car themselves according to instructions or create their own models. This toy set provides an educational and entertaining experience that encourages creativity and develops building skills. With the combination of space and city, the Lego "City Space Rover" set makes the building experience fun and engaging for all children.
                 </p>
 
                 <div class="row">
@@ -145,16 +144,18 @@ const ToyDetail = ({ toys }) => {
                       <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
                         <i class="fas fa-minus"></i>
                       </button>
+
                       <input type="text" class="form-control text-center border border-secondary" placeholder="14" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                      
                       <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
                   </div>
                 </div>
-                <button onClick={handlePurchase} class="btn btn-warning shadow-0"> Buy now </button>
-                <a href="*" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
-                <a href="*" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                <button onClick={handlePurchase} class="btn btn-warning shadow-0 m-1"> Buy now </button>
+                <a href="*" class="btn btn-primary shadow-0 m-1"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                <a href="*" class="btn btn-light border border-secondary py-2 icon-hover px-3 m-1"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
               </div>
             </main>
           </div>

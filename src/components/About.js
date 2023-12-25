@@ -24,9 +24,9 @@ const About = () => (
       </p>
       <p>Thank you for choosing us for all your toy needs!</p>
     </div>
-
+      
       <Footer/>
     </>
-    //html & bootstrap
+    // Need update for this interface
   );
 export default About;

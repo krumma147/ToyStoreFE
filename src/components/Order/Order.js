@@ -49,7 +49,7 @@ const Order = () =>{
 
       const getTotalToysPrice = () => {
         let sum = 0;
-        orders.map((order) => {
+        const allOrder = orders.map((order) => {
             sum += getToy(order.toy).price;
         })
         return sum;

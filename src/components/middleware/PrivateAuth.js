@@ -5,7 +5,7 @@ import { useAuth } from './AuthContext';
 const PrivateRoute = ({ element, roles }) => {
     const { user } = useAuth();
     const navigate = useNavigate();
-    if (!user) {
+    if (!user?.token) {
       navigate('/login');
       return;
     }

@@ -1,11 +1,8 @@
 import React from 'react';
 import { useAuth } from '../middleware/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    const navigate = useNavigate();
     const { user, logout } = useAuth();
-
     const handleLogout = () => {
         logout();
         // window.location.reload();
@@ -72,7 +69,7 @@ const Header = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a className="nav-link" href="/cart">
+                                    <a className="nav-link" href="/orders">
                                         <img src="/images/cart.svg" alt="" />
                                     </a>
                                 </li>

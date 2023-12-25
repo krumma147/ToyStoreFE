@@ -7,15 +7,15 @@ export const AuthProvider = ({ children }) => {
   const storedId = sessionStorage.getItem('id');
   const storedUsername = sessionStorage.getItem('username');
   const storedRole = sessionStorage.getItem('role');
-const [user, setUser] = useState(() => {
-  try {
-    // Attempt to parse the JSON string
-    return storedToken ? { token: storedToken, id: storedId, username: storedUsername, role: storedRole } : null;
-  } catch (error) {
-    console.error('Error parsing user data:', error);
-    return {};
-  }
-});
+  const [user, setUser] = useState(() => {
+    try {
+      // Attempt to parse the JSON string
+      return storedToken ? { token: storedToken, id: storedId, username: storedUsername, role: storedRole } : null;
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      return {};
+    }
+  });
 
 useEffect(() => {
   // Validate the token on component mount
