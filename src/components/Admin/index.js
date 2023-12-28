@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from './Sidebar';
 import Content from './Content';
-import {AdminStyle} from './admin.styles';
+import '../../admin.css';
 const Index = () => {
     return(
         <>
@@ -11,7 +11,6 @@ const Index = () => {
             <Content />
 
         </div>
-        <AdminStyle/>
         </>
     )
 }

@@ -30,7 +30,6 @@ const UserOrder = () =>{
             const userOrders = await GetOrderForUser(user.id);
             if(userOrders.length > 0){
             const toys = await GetAllToy();
-                // Update the state with the fetched data
                 setOrders(userOrders);
                 setToys(toys);
             }

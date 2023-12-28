@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const API = "https://toystore-api.onrender.com";
-const API = "http://localhost:3100";
+const API = "https://toystore-api.onrender.com";
 
 const GetAllBranch = async () =>{
     try {
@@ -31,10 +30,10 @@ const AddNewBranch = async (branch) => {
 const GetBranchById = async (id) => {
     try {
         const response = await axios.get(`${API}/branches/get/${id}`);
-        return response.data; // Return the data received from the API
+        return response.data;
     } catch (error) {
         console.error('Error updating category:', error);
-        throw error; // Rethrow the error so that the caller can handle it
+        throw error;
     }
 }
 

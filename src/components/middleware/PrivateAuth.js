@@ -11,7 +11,6 @@ const PrivateRoute = ({ element, roles }) => {
     }
   
     if (roles && !roles.includes(user.role)) {
-      // Alert the user and redirect to the home page
       alert('You do not have authorization to access this page.');
       navigate('/');
       return;

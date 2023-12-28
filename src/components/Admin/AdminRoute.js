@@ -7,13 +7,9 @@ const AdminRoute = () => {
 
     return (
         <Routes>
-          {/* <Route
-                path="/add"
-                element={<PrivateRoute element={<AddUser />} roles={['admin']} />}
-            /> */}
             <Route
-            path="/"
-            element={<PrivateRoute element={<Index />} roles={['admin']} />}
+                path="/"
+                element={<PrivateRoute element={<Index />} roles={['admin']} />}
             />
         </Routes>
       );

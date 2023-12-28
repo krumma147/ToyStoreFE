@@ -14,9 +14,6 @@ const Home = () => (
         <Hero />
         
         <TopProduct />
-        {/* <div>
-            <h2>Home Body</h2>
-        </div> */}
 
         <Info />
 

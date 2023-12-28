@@ -16,7 +16,6 @@ const Login = () => {
     try {
         
         const res = await userLogin(email, password);
-        console.log(`Data from APi: ${res}`);
         if (res.token) {
             const { token, id, username, role } = res;
             await login(token, id, username, role);

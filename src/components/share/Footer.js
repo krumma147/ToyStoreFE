@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return(
-        <footer class="footer-section">
+        <footer class="footer-section mt-5">
 			<div class="container relative">
 
 				<div class="sofa-img">

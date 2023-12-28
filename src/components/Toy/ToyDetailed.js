@@ -30,7 +30,6 @@ const ToyDetail = ({ toys }) => {
   useEffect(() => {
     const fetchToy = async () => {
       try {
-        // Filter the selected toy from the list based on the ID
         const toy = toys.find((toy) => toy._id === id);
 
         if (toy) {
@@ -59,7 +58,7 @@ const ToyDetail = ({ toys }) => {
   return (
     <>
       <Header />
-      <section class="py-5">
+      <section class="py-5 mb-5">
         <div class="container">
           <div class="row gx-5">
             <aside class="col-lg-6">
