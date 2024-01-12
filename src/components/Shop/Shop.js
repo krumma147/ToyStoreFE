@@ -2,11 +2,22 @@ import React, { useState, useEffect } from "react";
 import Header from "../share/Header";
 import ProductView from "./Products";
 import Footer from "../share/Footer";
-
+import { useAuth } from "../middleware/AuthContext";
 const Shop = ({toys}) => {
+    const { user } = useAuth();
     const [searchToys, setSearchToys] = useState([]);
     const [searchKey, setSearchKey] = useState("");
 
+    let cart = localStorage.getItem("Cart");
+
+    if (!cart) {
+        cart = {
+            user: "",
+            toys: [],
+            price: 0,
+        }
+        localStorage.setItem("Cart", JSON.stringify(cart));
+    }
     useEffect(() => {
         if (searchKey !== "") {
           let foundToys = toys.filter((toy) =>
@@ -21,7 +32,6 @@ const Shop = ({toys}) => {
     return(
         <>
             <Header />
-            
             <div className="row mt-4 justify-content-md-center">
                 <div className="col-md-6">
                     <div class="input-group rounded">

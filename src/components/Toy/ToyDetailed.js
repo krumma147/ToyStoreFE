@@ -1,31 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../share/Header';
 import Footer from '../share/Footer';
 import { useAuth } from '../middleware/AuthContext';
-import { AddOrder } from '../hooks/orderHook';
+import { AddToy } from "../CartManage/LocalStorageManage";
+
 
 const ToyDetail = ({ toys }) => {
+  const navigate  = useNavigate();
   const { id } = useParams();
   const [selectedToy, setSelectedToy] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-
-  const handlePurchase = (e) => {
-    if(!user){
-      alert("You need to login to purchase this product!");
-    }else{
-      const req = AddOrder(
-        {
-          user: user.id,
-          toy: id
-        }
-      )
-        if(req){
-          alert("Purchase Complete!");
-        }
-    }
-  }
 
   useEffect(() => {
     const fetchToy = async () => {
@@ -34,8 +20,6 @@ const ToyDetail = ({ toys }) => {
 
         if (toy) {
           setSelectedToy(toy);
-        } else {
-          console.log('Toy not found');
         }
       } catch (error) {
         console.error('Error fetching toy:', error);
@@ -46,6 +30,23 @@ const ToyDetail = ({ toys }) => {
 
     fetchToy();
   }, [id, toys]);
+
+  const handleBuyNow = (e) => {
+    if(!user){
+      alert("You need to login to purchase this product!");
+    }else{
+      AddToy(user.id, id);
+      navigate("/cart");
+    }
+  }
+
+  const handleAddToCart = (e) => {
+    if(!user){
+      alert("You need to login to use this functionality!");
+    }else{
+      AddToy(user.id, id);
+    }
+  }
 
   if (loading) {
     return <p>Loading...</p>;
@@ -58,7 +59,8 @@ const ToyDetail = ({ toys }) => {
   return (
     <>
       <Header />
-      <section class="py-5 mb-5">
+
+      <section className="py-5">
         <div class="container">
           <div class="row gx-5">
             <aside class="col-lg-6">
@@ -152,8 +154,8 @@ const ToyDetail = ({ toys }) => {
                     </div>
                   </div>
                 </div>
-                <button onClick={handlePurchase} class="btn btn-warning shadow-0 m-1"> Buy now </button>
-                <a href="*" class="btn btn-primary shadow-0 m-1"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                <button onClick={handleBuyNow} class="btn btn-warning shadow-0 m-1">Buy now</button>
+                <button onClick={handleAddToCart} class="btn btn-primary shadow-0 m-1"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </button>
                 <a href="*" class="btn btn-light border border-secondary py-2 icon-hover px-3 m-1"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
               </div>
             </main>

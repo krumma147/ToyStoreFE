@@ -14,7 +14,7 @@ const getUserById = async (id) => {
   };
 
 const userLogin = async (email, password) => {
-  console.log('userLogin hook called with:', email, password);
+  //console.log('userLogin hook called with:', email, password);
 
   try {
     const response = await axios.post(`${API}/login`, { email, password });

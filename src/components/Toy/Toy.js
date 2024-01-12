@@ -11,8 +11,12 @@ const Toys = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseToy = await GetAllToy();
-        setToys(responseToy);
+        const toyDatas = JSON.parse(localStorage.getItem("Toys"));
+        if(!toyDatas){
+          const responseToy = await GetAllToy();
+          localStorage.setItem("Toys", JSON.stringify(responseToy));
+        }
+        setToys(toyDatas);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

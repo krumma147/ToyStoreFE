@@ -7,7 +7,6 @@ import Info from './share/Info';
 import TopProduct from './share/TopProduct';
 
 const Home = () => (
-
     <div>
         <Header />
         
