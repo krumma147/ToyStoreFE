@@ -6,7 +6,7 @@ const ProductView = ({toys}) => {
         <div class="untree_co-section product-section before-footer-section">
 		    <div class="container">
 		      	<div class="row">
-                    {toys.length > 0 ? "" : (<h2>There's no toy yet :'( </h2>)}
+                    {toys?.length > 0 ? "" : (<h2>There's no toy yet :'( </h2>)}
                     {toys?.map((toy) =>(
                         <div class="col-12 col-md-4 col-lg-3 mb-5">
                             <a class="product-item" href={`/toys/${toy._id}`}>

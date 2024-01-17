@@ -11,9 +11,10 @@ const Toys = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const toyDatas = JSON.parse(localStorage.getItem("Toys"));
+        let toyDatas = JSON.parse(localStorage.getItem("Toys"));
         if(!toyDatas){
           const responseToy = await GetAllToy();
+          setToys(responseToy);
           localStorage.setItem("Toys", JSON.stringify(responseToy));
         }
         setToys(toyDatas);
@@ -23,7 +24,7 @@ const Toys = () => {
     };
 
     fetchData();
-  }, []);
+  }, [toys]);
 
   return (
     <Routes>
