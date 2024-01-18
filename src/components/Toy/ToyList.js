@@ -3,34 +3,39 @@ import { GetAllToy, DeleteToy } from '../hooks/toyHook';
 import { GetAllBranch } from '../hooks/branchHook';
 import { GetAllCategory } from '../hooks/categoryHook';
 import ModalForm from './ModalForm';
+import Loading from "../share/Loading";
 
 const ToyList = () => {
   const [toys, setToys] = useState([]);
   const [categories, setCategories] = useState([]);
   const [branches, setBranches] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      const responseToy = await GetAllToy();
+      const responseCategories = await GetAllCategory();
+      const responseBranches = await GetAllBranch();
+      // Update the state with the fetched data
+      setToys(responseToy);
+      setBranches(responseBranches);
+      setCategories(responseCategories);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseToy = await GetAllToy();
-        const responseCategories = await GetAllCategory();
-        const responseBranches = await GetAllBranch();
-        // Update the state with the fetched data
-        setToys(responseToy);
-        setBranches(responseBranches);
-        setCategories(responseCategories);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
     fetchData();
   }, []);
 
   const handleDelete = async (id) => {
     try {
       if(window.confirm('Are you sure you want to delete this toy?')){
+        setLoading(true);
         await DeleteToy(id);
-        window.location.reload();
+        fetchData();
+        setLoading(false);
       }
     } catch (error) {
       console.warn(error);
@@ -39,6 +44,7 @@ const ToyList = () => {
 
   return (
     <>
+    {loading && <Loading />}
       <div className=''>
         <ModalForm toys={toys} action="add" categories={categories} branches={branches} />
       </div>
@@ -68,14 +74,16 @@ const ToyList = () => {
                         <td className='col'>{toy.name}</td>
                         <td className='col'>{toy.price} VND</td>
                         <td className='col'>
-                          <img src={`images/products/${toy.image}`} height="100px" width="100px" />
+                          <img src={`images/products/${toy.image}`} alt={`toy ${toy._id}`} height="100px" width="100px" />
                         </td>
                         <td className='col'>{toy.branch.location}, {toy.branch.city}</td>
                         <td className='col'>{toy.category.name}</td>
 
                         <td className='col-md-2'>
                           <div class="d-flex gap-2">
-                          <ModalForm toys={toys} id={toy._id} index={index} action="edit" categories={categories} branches={branches} />
+                          <ModalForm toys={toys} id={toy._id} 
+                          fetchData={()=>fetchData()}
+                          action="edit" categories={categories} branches={branches} />
                             <button
                               type="button"
                               class="btn btn-danger"

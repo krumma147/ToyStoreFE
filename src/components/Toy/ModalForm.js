@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { AddNewToy, UpdateToy } from '../hooks/toyHook';
+import Loading from "../share/Loading";
 
-const ModalForm = ({ toys, id, action, index , categories, branches }) => {
+const ModalForm = ({ toys, id, action, fetchData , categories, branches }) => {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [branch, setBranch] = useState("");
   const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (id && toys && toys.length > 0) {
@@ -43,12 +45,12 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
   };
   
   // Btn handler
-  const handleAction = () => {
+  const handleAction = async () => {
     if (name === "" || price === "" || image === "" || branch === "" || category === "") {
       alert("All input fields are required!");
       return;
     }
-  
+    setLoading(true);
     const existtoy = toys.find((c) => c.name === name);
     if (!existtoy || (action === "edit" && existtoy._id === id)) {
       const toy = {
@@ -60,12 +62,12 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
       };
   
       if (action === "add") {
-        AddNewToy(toy);
+        await AddNewToy(toy);
+        window.location.reload();
       } else if (action === "edit") {
-        UpdateToy(id, toy);
+        await UpdateToy(id, toy);
+        fetchData();
       }
-      
-      window.location.reload();
     } else {
       alert("Toy already exists!");
       setName("");
@@ -74,6 +76,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
       setImage("");
       setCategory("");
     }
+    setLoading(false);
   };
 
   const handleCancel = () => {
@@ -166,6 +169,7 @@ const ModalForm = ({ toys, id, action, index , categories, branches }) => {
 
   return (
     <div>
+      {loading && <Loading/>}
       <button
         type="button"
         className={`btn ${id ? "btn-warning" : "btn-primary"} `}

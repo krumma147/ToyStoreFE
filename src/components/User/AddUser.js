@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserById, CreateUser, EditUser } from '../hooks/userHook';
+import Loading from '../share/Loading';
 //NOTE: Add validatation
 
 const AddUser = () => {
@@ -11,6 +12,7 @@ const AddUser = () => {
     const [password, setPassword] = useState('');
     const [repassword, setRePassword] = useState('');
     const [role, setRole] = useState('');
+    const [loading, setLoading] = useState(false);
     if (id) {
         
 
@@ -21,6 +23,7 @@ const AddUser = () => {
               // Assuming user has `name` and `email` properties
               setName(user.name);
               setEmail(user.email);
+              setRole(user.role);
             } else {
               // Handle the case where the user is not found or there is an error
               console.log('User not found or error fetching user details.');
@@ -40,8 +43,10 @@ const AddUser = () => {
             }
             if(password !== repassword)
                 console.warn("Password and Re-password do not match");
+            setLoading(true);
             await CreateUser(user);
-            navigate('/users');
+            setLoading(false);
+            navigate('/admin');
         };
 
         const handleEdit = async (e) => {
@@ -56,14 +61,14 @@ const AddUser = () => {
             }
             if(password !== repassword)
                 console.warn("Password and Re-password do not match");
+            setLoading(true);
             try {
-                // Make a POST request to create a new user
                 await EditUser(id, user);
-                // Optionally, you can redirect the user or perform any other action upon successful user creation
             } catch (error) {
             console.error('Error creating user:', error);
             }
-            await navigate('/users');
+            setLoading(false);
+            navigate('/admin');
         };
 
   const editForm = (
@@ -91,7 +96,7 @@ const AddUser = () => {
                 <input
                     type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                     class="form-control"
-                    placeholder="Email Address"
+                    placeholder="Password"
                 />
             </div>
             <div class="mb-3">
@@ -99,7 +104,7 @@ const AddUser = () => {
                 <input
                     type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)}
                     class="form-control"
-                    placeholder="Email Address"
+                    placeholder="Re-enter Password"
                 />
             </div>
 
@@ -142,7 +147,7 @@ const AddUser = () => {
                 <input
                     type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                     class="form-control"
-                    placeholder="Email Address"
+                    placeholder="Password"
                 />
             </div>
             <div class="mb-3">
@@ -150,7 +155,7 @@ const AddUser = () => {
                 <input
                     type="password" value={repassword} onChange={(e) => setRePassword(e.target.value)}
                     class="form-control"
-                    placeholder="Email Address"
+                    placeholder="Re-enter Password"
                 />
             </div>
 
@@ -161,7 +166,11 @@ const AddUser = () => {
 
   return (
     <div className="container"> 
-        <h2>Create New Account</h2>
+    {loading && <Loading/>}
+        <h2>{
+            id ? "Edit Account": "Create New Account"
+          }
+        </h2>
           {
             id ? editForm : addForm
           }

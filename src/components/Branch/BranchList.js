@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from './ModalForm';
 import { GetAllBranch, DeleteBranch } from '../hooks/branchHook';
+import Loading from "../share/Loading";
 
 const BranchList = () => {
   const [branches, setBranches] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const fetchData = async () => {
+    try {
+      let response = await GetAllBranch();
+      setBranches(response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await GetAllBranch(); // Call the function and await the response
-        setBranches(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
 
   const handleDelete = async (id) => {
-    DeleteBranch(id);
-    window.location.reload();
+    if(window.confirm('Are you sure you want to delete this toy?')){
+      setLoading(true);
+      await DeleteBranch(id);
+      fetchData();
+      setLoading(false);
+    }
   };
 
   return (
     <>
+    {loading&&<Loading />}
       <div className=''>
         <ModalForm branches={branches} action="add" />
       </div>
@@ -55,8 +61,8 @@ const BranchList = () => {
                           <ModalForm
                             branches={branches}
                             id={branch._id}
-                            index={index}
                             action="edit"
+                            fetchData = {()=>fetchData()}
                           />
                           <button
                             type="button"

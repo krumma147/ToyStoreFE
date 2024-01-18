@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { AddNew, UpdateCategory } from "../hooks/categoryHook";
+import Loading from "../share/Loading";
 
-const ModalForm = ({ categories, id, action, index }) => {
+const ModalForm = ({ categories, id, action, fetchData }) => {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (id && categories && categories.length > 0) {
       let cat = categories.find((cat) => cat._id === id);
@@ -18,7 +19,6 @@ const ModalForm = ({ categories, id, action, index }) => {
     }
   }, [id, categories]);
 
-  // /Active modal button
   const toggleModel = () => {
     setModal(!modal);
     if(id){
@@ -42,29 +42,33 @@ const ModalForm = ({ categories, id, action, index }) => {
     </div>
   );
 
-  const handleAction = () => {
+  const handleAction = async () => {
     let existCategory;
     if (name === "") {
       alert("Category name is required!");
       return;
     }
+    setLoading(true);
     if (categories.length > 0) {
       existCategory = categories.find((c) => c.name === name);
       if (!existCategory) {
         const category = {
           name: name,
         };
+        
         if (action === "add") {
-          AddNew(category);
+          await AddNew(category);
+          window.location.reload();
         } else if (action === "edit") {
-          UpdateCategory(id, category);
+          await UpdateCategory(id, category);
+          fetchData();
         }
-        window.location.reload();
       } else {
         alert("Category already exists!");
         setName("");
       }
     }
+    setLoading(false);
   };
 
   const handleCancel = () => {
@@ -73,6 +77,7 @@ const ModalForm = ({ categories, id, action, index }) => {
 
   return (
     <div>
+      {loading && <Loading/>}
       <button
         type="button"
         className={`btn ${id ? "btn-warning" : "btn-primary"} `}

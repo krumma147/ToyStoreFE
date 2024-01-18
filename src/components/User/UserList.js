@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {GetAllUser, DeleteUser} from '../hooks/userHook';
+import Loading from "../share/Loading";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Make a GET request to the API endpoint
-        const response = await GetAllUser();
-        // Update the state with the fetched data
-        setUsers(response);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+  const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
+  const fetchData = async () => {
+    try {
+      const response = await GetAllUser();
+      setUsers(response);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -25,12 +27,17 @@ const UserList = () => {
   }
 
   const handleDelete = async (id) => {
-    //UNDONE: Confirmation & FIX 404 ERROR
-    DeleteUser(id);
+    if(window.confirm('Are you sure you want to delete this user?')) {
+      setLoading(true);
+      await DeleteUser(id);
+      fetchData();
+      setLoading(false);
+    }
   };
 
   return (
     <>
+    {loading && <Loading />}
       <div class="card border-0">
           <div class="card-header">
               <h2 class="card-title text-center">

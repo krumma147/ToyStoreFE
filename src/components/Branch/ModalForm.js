@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {AddNewBranch, UpdateBranch} from '../hooks/branchHook';
+import Loading from "../share/Loading";
 
-const ModalForm = ({ branches, id, action, index }) => {
+const ModalForm = ({ branches, id, action, fetchData }) => {
   const [modal, setModal] = useState(false);
   const [location, setLocation] = useState("");
   const [city, setCity] = useState("");
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (id && branches && branches.length > 0) {
       let branch = branches.find((branch) => branch._id === id);
@@ -22,51 +23,40 @@ const ModalForm = ({ branches, id, action, index }) => {
     }
   }, [id, branches]);
 
-  // /Active modal button
   const toggleModel = () => {
     setModal(!modal);
-    // if(id){
-    //   console.log(id);
-    // }
   };
   
-  // Btn handler
-  const handleAction = () => {
-      if (location === "" && city === "") {
-          alert("All input fields are required!");
-          return;
-        }
-        let existBranch;
-    if (branches.length > 0) {
-      existBranch = branches.find((c) => c.location === location && c.city === city);
-      if (!existBranch) {
-        const branch = {
-            location: location,
-            city: city
-        };
-        console.log(branch);
-        if (action === "add") {
-            AddNewBranch(branch);
-        } else if (action === "edit") {
-            UpdateBranch(id, branch);
-        }
-        window.location.reload();
-      } else {
-        alert("Branch already exists!");
-        setLocation("");
-        setCity("");
-      }
-    }else{
-      const branch = {
-        location: location,
-        city: city
-      };
-      if (action === "add") {
-          AddNewBranch(branch);
-          window.location.reload();
-      }
+  const handleAction = async () => {
+  if (location === "" || city === "") {
+    alert("All input fields are required!");
+    return;
+  }
+
+  let existBranch;
+  existBranch = branches.find((c) => c.location === location && c.city === city);
+  if (!existBranch) {
+    const branch = {
+      location: location,
+      city: city
+    };
+    setLoading(true);
+    if (action === "add") {
+      await AddNewBranch(branch);
+      window.location.reload();
+    } 
+    if (action === "edit") {
+      await UpdateBranch(id, branch);
+      fetchData();
+      setLoading(false);
     }
-  };
+    handleCancel();
+  } else {
+    alert("Branch already exists!");
+    setLocation("");
+    setCity("");
+  }
+};
 
   const handleCancel = () => {
     setModal(false);
@@ -103,6 +93,7 @@ const ModalForm = ({ branches, id, action, index }) => {
 
   return (
     <div>
+      {loading&& <Loading />}
       <button
         type="button"
         className={`btn ${id ? "btn-warning" : "btn-primary"} `}

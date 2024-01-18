@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './middleware/AuthContext';
 import { userLogin } from './hooks/userHook';
+import Loading from './share/Loading';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,24 +11,30 @@ const Login = () => {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [loading, setLoading] = useState(false);
+    
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            
+            setLoading(true);
             const res = await userLogin(email, password);
             if (res.token) {
                 const { token, id, username, role } = res;
                 await login(token, id, username, role);
+                setLoading(false);
                 navigate('/toys');
             }
         } catch (error) {
             console.error('Login failed:', error);
+            setLoading(false);
         }
     };
 
+    
+
     return (
         <div class="container">
+            {loading && <Loading />}
             <div class="row m-5 no-gutters shadow-lg">
                 <div class="col-md-6 d-none d-md-block">
                     <img src="images/register.png" 
@@ -78,13 +85,13 @@ const Login = () => {
                                 <i class="fa fa-facebook" aria-hidden="true"></i> Login With Facebook
                             </button>
                         </div>
-                    <div class="pt-4 text-center">
-                        Get Members Benefit. <a href="/register">Sign Up</a>
+                        <div class="pt-4 text-center">
+                            Get Members Benefit. <a href="/register">Sign Up</a>
+                        </div>
                     </div>
                 </div>
-
-                </div>
             </div>
+            
         </div>
     );
 };

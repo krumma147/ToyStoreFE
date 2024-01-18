@@ -3,8 +3,11 @@ import { useAuth } from '../middleware/AuthContext';
 
 const Header = () => {
     const { user, logout } = useAuth();
+
     const handleLogout = () => {
-        logout();
+        if(window.confirm('Are you sure you want to logout?')){
+            logout();
+        }
         // window.location.reload();
     }
     
@@ -29,10 +32,10 @@ const Header = () => {
                         </ul>
 
                         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                            {user ? (
+                            {user? (
                                 <>
                                     <li class="nav-item dropdown">
-                                        <button className="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button className="nav-link" id="navbarDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {user.username}
                                         </button>
                                         
@@ -42,10 +45,10 @@ const Header = () => {
                                             {user.role === 'admin' ? (
                                                 <>
                                                     <li><a class="dropdown-item" href="/admin">Admin Page</a></li>
-                                                    <li><a class="dropdown-item" href="/users">UserList</a></li>
+                                                    {/* <li><a class="dropdown-item" href="/users">UserList</a></li>
                                                     <li><a class="dropdown-item" href="/toys/list">Toy List</a></li>
                                                     <li><a class="dropdown-item" href="/branches">Branches</a></li>
-                                                    <li><a class="dropdown-item" href="/categories">Categories</a></li>
+                                                    <li><a class="dropdown-item" href="/categories">Categories</a></li> */}
                                                 </>
                                             ): null}
                                             <li><hr class="dropdown-divider"/></li>

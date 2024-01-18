@@ -3,30 +3,36 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const storedToken = sessionStorage.getItem('token');
-  const storedId = sessionStorage.getItem('id');
-  const storedUsername = sessionStorage.getItem('username');
-  const storedRole = sessionStorage.getItem('role');
   const [user, setUser] = useState({});
-useEffect(() => {
-  if (!user?.token) {
-    setUser(() => {
-      try {
-        return storedToken ? { token: storedToken, id: storedId, username: storedUsername, role: storedRole } : null;
-      } catch (error) {
-        console.error('Error parsing user data:', error);
-        return {};
+
+  useEffect(() => {
+  if (!user.token) {
+    try {
+      const storedData = JSON.parse(sessionStorage.getItem('user'));
+      // const storedId = sessionStorage.getItem('id');
+      // const storedUsername = sessionStorage.getItem('username');
+      // const storedRole = sessionStorage.getItem('role');
+      if (storedData.token && storedData.id && storedData.username && storedData.role) {
+        setUser({ token: storedData.token, id: storedData.id, username: storedData.username, role: storedData.role });
       }
-    });
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+    }
   }
-}, [user]);
+}, [user, setUser]);
 
 const login = (token, id, username, role) => {
-  setUser({ token });
-  sessionStorage.setItem('token', token);
-  sessionStorage.setItem('id', id);
-  sessionStorage.setItem('username', username);
-  sessionStorage.setItem('role', role);
+  const data = {
+    token: token,
+    id: id,
+    username: username,
+    role: role
+  }
+  setUser({ data });
+  sessionStorage.setItem('user', JSON.stringify(data));
+  // sessionStorage.setItem('id', id);
+  // sessionStorage.setItem('username', username);
+  // sessionStorage.setItem('role', role);
 };
 const navigate = useNavigate();
 
