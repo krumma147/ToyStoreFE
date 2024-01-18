@@ -40,9 +40,11 @@ const Login = () => {
                     <img src="images/register.png" 
                     class="img-fluid" style={{minHeight:"100%"}} alt="" />
                 </div>
-
-                <div class="col-md-6 bg-white p-5">
-                    <h3 class="pb-3">Login Form</h3>
+                <div class="col-md-6 bg-white p-5 position-relative">
+                    <div className="position-absolute top-0 end-0">
+                        <a href='/' className='btn  p-3'><i class="fas fa-long-arrow-alt-left"></i> Back</a>
+                    </div>
+                    <h3 class="pb-3 text-center">Login</h3>
 
                     <div class="form-style">
                             <div class="form-group pb-3">    

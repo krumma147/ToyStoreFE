@@ -3,12 +3,10 @@ import { useAuth } from '../middleware/AuthContext';
 
 const Header = () => {
     const { user, logout } = useAuth();
-
     const handleLogout = () => {
         if(window.confirm('Are you sure you want to logout?')){
             logout();
         }
-        // window.location.reload();
     }
     
     return(
@@ -32,7 +30,7 @@ const Header = () => {
                         </ul>
 
                         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                            {user? (
+                            {user.username? (
                                 <>
                                     <li class="nav-item dropdown">
                                         <button className="nav-link" id="navbarDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,8 +59,6 @@ const Header = () => {
                                             <img src="/images/cart.svg" alt="" />
                                         </a>
                                     </li>
-
-                                    
                                 </>
                             ) : (
                                 <>
