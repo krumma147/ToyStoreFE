@@ -66,7 +66,7 @@ const ModalForm = ({ branches, id, action, fetchData }) => {
   const modalBody = (
     <div class="input-group mb-3">
       <span class="input-group " id="inputGroup-sizing-default">
-        Branch Locatiom
+        Branch Location
       </span>
       <input
         onChange={(e) => setLocation(e.target.value)}
@@ -115,7 +115,7 @@ const ModalForm = ({ branches, id, action, fetchData }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id={`${action}BranchModalLabel`}>
-                {action === "add" ? "Add New" : "Edit"} Category
+                {action === "add" ? "Add New" : "Edit"} Branch
               </h5>
               <button
                 type="button"

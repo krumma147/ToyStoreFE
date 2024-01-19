@@ -191,7 +191,7 @@ const ModalForm = ({ toys, id, action, fetchData , categories, branches }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id={`${action}ToyModalLabel`}>
-                {action === "add" ? "Add New" : "Edit"} Category
+                {action === "add" ? "Add New" : "Edit"} Toy
               </h5>
               <button
                 type="button"

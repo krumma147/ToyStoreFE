@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Header from "../share/Header";
 import ProductView from "./Products";
 import Footer from "../share/Footer";
-import { useAuth } from "../middleware/AuthContext";
+// import { useAuth } from "../middleware/AuthContext";
 const Shop = ({toys}) => {
-    const { user } = useAuth();
+    // const { user } = useAuth();
     const [searchToys, setSearchToys] = useState([]);
     const [searchKey, setSearchKey] = useState("");
 

@@ -3,7 +3,6 @@ import { GetBranchById } from './branchHook';
 import { GetCategoryById } from './categoryHook';
 
 const API = "https://toystore-api.onrender.com";
-
 //const API = "http://localhost:3100";
 
 const GetAllToy = async () =>{

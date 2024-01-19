@@ -16,7 +16,7 @@ const UserOrder = () =>{
 
     const handleDelete = async (id) => {
         try {
-            if(window.confirm("Are you sure you want to delete?")){
+            if(window.confirm("Are you sure you want to delete this order?")){
                 await DeleteOrder(id);
                 window.location.reload();
             }
@@ -38,7 +38,7 @@ const UserOrder = () =>{
         }
         };
         fetchData();
-    }, [user._id]);
+    }, [user.id]);
     
       const getToy = (toyId) => {
         const toy = toys.find((t) => t._id === toyId);
@@ -50,9 +50,9 @@ const UserOrder = () =>{
 
       const getTotalToysPrice = () => {
         let sum = 0;
-        orders.map((order) => {
-            sum += getToy(order.toy).price;
-        })
+        orders.map((order) => (
+            sum += getToy(order.toy).price)
+        )
         return sum;
       }
 

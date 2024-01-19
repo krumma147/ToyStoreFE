@@ -20,7 +20,7 @@ const BranchList = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if(window.confirm('Are you sure you want to delete this toy?')){
+    if(window.confirm('Are you sure you want to delete this branch?')){
       setLoading(true);
       await DeleteBranch(id);
       fetchData();
